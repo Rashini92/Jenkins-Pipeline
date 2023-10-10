@@ -23,6 +23,13 @@ pipeline{
             steps{
                 echo "perform a security scan on the code using 'Codiga' tool to identify any vulnerabilities"
             }
+            post{
+                success{
+                    mail to:"rashinijayanga@gmail.com",
+                    subject:"Security Scan stage email",
+                    body:"Security Scan was successful"
+                }
+            }
         }
         stage('Deploy to Staging'){
             steps{
@@ -32,6 +39,13 @@ pipeline{
         stage('Integration Tests on Staging'){
             steps{
                 echo "run integration tests on the staging environment to ensure the application functions as expected in a production-like environment."
+            }
+            post{
+                success{
+                    mail to:"rashinijayanga@gmail.com",
+                    subject:"Integration Test stage email",
+                    body:"Integration Tests were successful"
+                }
             }
         }
         stage('Deploy to Production'){
